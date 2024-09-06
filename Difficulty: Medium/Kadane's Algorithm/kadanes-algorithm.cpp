@@ -1,53 +1,46 @@
 //{ Driver Code Starts
+// Initial Template for C++
 #include <bits/stdc++.h>
 using namespace std;
 
 
 // } Driver Code Ends
+// User function Template for C++
 class Solution {
   public:
-    // arr: input array
-    // n: size of array
     // Function to find the sum of contiguous subarray with maximum sum.
-    long long maxSubarraySum(int arr[], int n) {
+    int maxSubarraySum(vector<int> &arr) {
+        // code here...
+          int maxSoFar = arr[0]; 
+    int currentMax = arr[0]; 
+    for (int i = 1; i < arr.size(); i++) {
+        currentMax = max(arr[i], currentMax + arr[i]); 
+        maxSoFar = max(maxSoFar, currentMax); 
+    }
 
-        // Your code here nbvc
-        long long sum=0;
-        long long  maxsum=INT_MIN;
-        
-        for(int i=0;i<n;i++)
-        {
-            sum+=arr[i];
-            maxsum=max(maxsum,sum);
-            if(sum<0)
-            {
-                sum=0;
-            }
-        }
-        return maxsum;
+    return maxSoFar;
     }
 };
 
 //{ Driver Code Starts.
 
 int main() {
-    int t, n;
-
-    cin >> t;   // input testcases
-    while (t--) // while testcases exist
+    int t;
+    cin >> t;
+    cin.ignore(); // To discard any leftover newline characters
+    while (t--)   // while testcases exist
     {
-
-        cin >> n; // input size of array
-
-        int a[n];
-
-        for (int i = 0; i < n; i++)
-            cin >> a[i]; // inputting elements of array
+        vector<int> arr;
+        string input;
+        getline(cin, input); // Read the entire line for the array elements
+        stringstream ss(input);
+        int number;
+        while (ss >> number) {
+            arr.push_back(number);
+        }
 
         Solution ob;
-
-        cout << ob.maxSubarraySum(a, n) << endl;
+        cout << ob.maxSubarraySum(arr) << endl;
     }
 }
-
 // } Driver Code Ends
