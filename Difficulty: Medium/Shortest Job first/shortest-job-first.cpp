@@ -13,17 +13,24 @@ using namespace std;
 class Solution {
   public:
     long long solve(vector<int>& bt) {
-        sort(bt.begin(),bt.end());
         // code here
-        long long startAt=0;
-        long long endsAt=bt[0];
+        sort(bt.begin(),bt.end());
+        
+        vector<long long> cum(bt.size());
+        cum[0]=bt[0];
+        for(int i=1;i<bt.size();i++)
+        {
+            cum[i]=cum[i-1]+bt[i];
+        }
+        
+        long long ans=0;
         
         for(int i=1;i<bt.size();i++)
         {
-            startAt+=endsAt;
-            endsAt+=bt[i];
+            ans+=cum[i-1];
         }
-        return startAt/bt.size();
+        
+        return ans/bt.size();
     }
 };
 
@@ -42,7 +49,9 @@ int main() {
         Solution obj;
         long long ans = obj.solve(bt);
         cout << ans << "\n";
-    }
+    
+cout << "~" << "\n";
+}
     return 0;
 }
 // } Driver Code Ends
